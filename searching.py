@@ -37,10 +37,21 @@ def linear_search(sequence: list[int], target: int) -> dict:
     return result
 
 
+def pattern_search(sequence: str, pattern: str) -> set:
+    window_size: int = len(pattern)
+    result: set = set()
+    for i in range(len(sequence) - window_size + 1):
+        if sequence[i:i + window_size] == pattern:
+            result.add(i + window_size // 2)
+    return result
+
+
 def main():
-    sequential_data = read_data('sequential.json', 'unordered_numbers')
-    print(sequential_data)
-    print(linear_search(sequential_data, 5))
+    sequential_data: list[int] = read_data('sequential.json', 'unordered_numbers')
+    print('Unordered sequence:', sequential_data)
+    print('Linear search result:', linear_search(sequential_data, 5))
+    dna_sequence: str = read_data('sequential.json', 'dna_sequence')
+    print('Pattern search:', pattern_search(dna_sequence, 'TGA'))
 
 
 if __name__ == '__main__':
